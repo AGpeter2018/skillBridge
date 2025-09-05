@@ -1,0 +1,15 @@
+.join-header .join-link {
+  font-size: large;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 10px 12px;
+  line-height: 50px;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.join-header .join-link:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+}
