@@ -1,10 +1,9 @@
-import react from "react";
-
 import "./Login.style.css";
 
 import linkedInLogo from "../images/login-logo.svg";
 import JoinHeader from "./join-component/join-component";
 import SignIn from "./sign-in-component/sign-in.component";
+import SectionComponent from "./section-component/section.component";
 
 const LoginPage = (props) => {
   return (
@@ -18,6 +17,7 @@ const LoginPage = (props) => {
           <SignIn />
         </div>
       </nav>
+      <SectionComponent />
     </div>
   );
 };

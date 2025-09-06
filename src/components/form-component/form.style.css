@@ -1,0 +1,21 @@
+.google-btn {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  align-items: center;
+  height: 56px;
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: inset 0 0 0 2px rgba(0 0 0 /60%),
+    inset 0 0 0 2px rgba(0 0 0 /0%) inset 0 0 0 1px rgba(0 0 0 /0);
+  vertical-align: middle;
+  z-index: 0;
+  transition-duration: 167ms;
+  font-size: 20px;
+  color: rgba(0 0 0 0.5);
+}
+
+.google-btn:hover {
+  background-color: rgba(207, 207, 207, 0.25);
+  color: rgba(0 0 0 0.75);
+}
