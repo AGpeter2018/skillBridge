@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./join.style.css";
 
 const JoinHeader = ({ to, children, className }) => (
-  <div className={`join-header ${className || ""}`}>
-    <Link to={to}>{children}</Link>
-  </div>
+  <NavLink
+    to={to}
+    className={({ isActive }) => `${className} ${isActive ? "active" : ""}`}
+  >
+    {children}
+  </NavLink>
 );
 
 export default JoinHeader;

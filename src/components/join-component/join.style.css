@@ -1,11 +1,15 @@
-.join-header {
+/* .join-header {
   line-height: 50px;
   border-radius: 4px;
-  margin-right: 12px;
-}
-.join-header a {
+  } */
+
+/* a {
   font-size: large;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.6);
-  padding: 10px 12px;
-}
+  padding: 5px 12px;
+  padding-left: -5rem;
+  padding-right: 3rem;
+  padding-bottom: 2rem;
+  margin-right: 5px;
+} */

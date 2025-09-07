@@ -28,7 +28,7 @@ class HomeNav extends Component {
           to: "/post",
           icon: IconPlus,
           label: "Post",
-          className: "network",
+          className: "plus",
         },
         {
           to: "/notifications",
@@ -40,7 +40,6 @@ class HomeNav extends Component {
           to: "/Profile",
           icon: IconUser,
           label: "Me",
-          className: "network",
         },
       ],
     };

@@ -16,24 +16,22 @@
 .container .nav-body a {
   width: 135px;
   height: 34px;
+  text-decoration: none;
 }
 
 .header-sign {
   display: flex;
 }
 
-/* .header-sign .join-link {
+.header-sign .join-link {
   font-size: large;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.6);
-  padding: 10px 12px;
   line-height: 50px;
   border-radius: 4px;
   margin-right: 12px;
-} */
+}
 
 .header-sign .join-link:hover {
-  background-color: rgba(0, 0, 0, 0.08);
   color: rgba(0, 0, 0, 0.9);
-  text-decoration: none;
 }
