@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 
 import "./join.style.css";
 
-const JoinHeader = () => (
-  <div className="join-header">
-    <Link className="join-link" to="/">
-      Join now
-    </Link>
+const JoinHeader = ({ to, children, className }) => (
+  <div className={`join-header ${className || ""}`}>
+    <Link to={to}>{children}</Link>
   </div>
 );
 

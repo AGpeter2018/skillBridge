@@ -13,8 +13,10 @@ const LoginPage = (props) => {
           <img src={linkedInLogo} alt="LinkedIn" />
         </a>
         <div className="header-sign">
-          <JoinHeader />
-          <SignIn />
+          <JoinHeader className="join-link" to="/">
+            Join now
+          </JoinHeader>
+          <SignIn>Sign In</SignIn>
         </div>
       </nav>
       <SectionComponent />

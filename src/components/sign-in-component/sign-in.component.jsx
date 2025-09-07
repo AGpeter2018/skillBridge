@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import "./sign-in.style.css";
 
-const SignIn = () => (
+const SignIn = (props) => (
   <div className="sign-in">
     <Link className="sign-link" to="/">
-      Sign In
+      {props.children}
     </Link>
   </div>
 );
