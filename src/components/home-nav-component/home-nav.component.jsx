@@ -8,7 +8,10 @@ import IconNotification from "../../images/nav-notifications.svg";
 import JoinHeader from "../join-component/join-component";
 import IconUser from "../../images/user.svg";
 import IconPlus from "../../images/square-plus-solid-full.svg";
+import IconDown from "../../images/down-icon.svg";
+import IconNav from "../../images/nav-work.svg";
 
+import SignOut from "../sign-out-component/sign-out.component";
 import "./home-nav.style.css";
 
 class HomeNav extends Component {
@@ -39,7 +42,16 @@ class HomeNav extends Component {
         {
           to: "/Profile",
           icon: IconUser,
+          icon2: IconDown,
           label: "Me",
+          className: "user",
+        },
+        {
+          to: "/works",
+          icon: IconNav,
+          icon2: IconDown,
+          label: "Works",
+          className: "work",
         },
       ],
     };
@@ -50,7 +62,13 @@ class HomeNav extends Component {
       <div className="home-nav-container">
         <footer className="home-nav-footer">
           {this.state.navItems.map((item, index) => (
-            <JoinHeader key={index} className="Home-nav" to={item.to}>
+            <JoinHeader
+              key={index}
+              className={`Home-nav ${item.className || ""} ${
+                item.label === "Works" ? "works-nav" : ""
+              }`}
+              to={item.to}
+            >
               <img
                 src={item.icon}
                 alt={`${item.label} icon`}
@@ -60,7 +78,17 @@ class HomeNav extends Component {
                     : ""
                 }`}
               />
-              <span className={item.className || ""}>{item.label}</span>
+              <span className={item.className || ""}>
+                {item.label}
+                {item.icon2 && (
+                  <img
+                    src={item.icon2}
+                    alt="dropdown icon"
+                    className="down-icon"
+                  />
+                )}
+                {item.label === "Me" && <SignOut />}
+              </span>
             </JoinHeader>
           ))}
         </footer>

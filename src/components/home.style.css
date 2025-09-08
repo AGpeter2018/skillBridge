@@ -9,3 +9,41 @@
   width: 100vw;
   z-index: 100;
 }
+
+.content {
+  max-width: 1128px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  padding-top: 52px;
+  max-width: 100%;
+}
+
+.container section {
+  min-height: 50px;
+  padding: 16px;
+  box-sizing: content-box;
+  text-align: center;
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+}
+
+.layout {
+  display: grid;
+  grid-template-areas: "left main right";
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto;
+  gap: 25px;
+  margin: 25px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+  }
+}

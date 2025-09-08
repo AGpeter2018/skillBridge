@@ -1,0 +1,21 @@
+.content section h5 {
+  color: #6a64c2;
+  font-size: 14px;
+}
+
+.content section a {
+  font-weight: 700;
+}
+
+.content p {
+  font-size: 14px;
+  color: #4f4949;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    flex-direction: column;
+    padding: 0 5px;
+  }
+}
