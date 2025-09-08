@@ -17,4 +17,59 @@
 .share-box {
   display: flex;
   flex-direction: column;
+  color: #958b7b;
+  margin: 0 0 8px;
+  background: white;
+}
+
+.share-box button {
+  outline: none;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 48px;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.share-box div:first-child {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+}
+.user {
+  width: 48px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.user-profile button {
+  margin: 4px 0;
+  flex-grow: 1;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding-left: 14px;
+  border-radius: 35px;
+  background: white;
+  text-align: left;
+}
+
+.share-box div:nth-child(2) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 4rem;
+  padding-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+button img {
+  margin: 0 4px 0 px;
+}
+
+.span-block span {
+  color: #74b5f9;
 }
