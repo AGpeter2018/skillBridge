@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { signOutApi } from "../../actions";
+import { Navigate } from "react-router-dom";
 
 // Import your icons
 import IconHome from "../../images/nav-home.svg";
@@ -13,6 +16,7 @@ import IconNav from "../../images/nav-work.svg";
 
 import SignOut from "../sign-out-component/sign-out.component";
 import "./home-nav.style.css";
+import { signOut } from "firebase/auth";
 
 class HomeNav extends Component {
   constructor(props) {
@@ -40,7 +44,7 @@ class HomeNav extends Component {
           className: "network",
         },
         {
-          to: "/Profile",
+          to: "/",
           icon: IconUser,
           icon2: IconDown,
           label: "Me",
@@ -69,15 +73,30 @@ class HomeNav extends Component {
               }`}
               to={item.to}
             >
-              <img
-                src={item.icon}
-                alt={`${item.label} icon`}
-                className={`home-img ${
-                  item.label === "Me" || item.label === "Post"
-                    ? "user-image"
-                    : ""
-                }`}
-              />
+              {!this.props.user && <Navigate to="/" replace />}
+              {item.label === "Me" &&
+              this.props.user &&
+              this.props.user.photoURL ? (
+                <img
+                  src={this.props.user.photoURL}
+                  alt="User profile"
+                  className={`home-img ${
+                    item.label === "Me" || item.label === "Post"
+                      ? "user-image"
+                      : ""
+                  }`}
+                />
+              ) : (
+                <img
+                  src={item.icon}
+                  alt={`${item.label} icon`}
+                  className={`home-img ${
+                    item.label === "Me" || item.label === "Post"
+                      ? "user-image"
+                      : ""
+                  }`}
+                />
+              )}
               <span className={item.className || ""}>
                 {item.label}
                 {item.icon2 && (
@@ -87,7 +106,9 @@ class HomeNav extends Component {
                     className="down-icon"
                   />
                 )}
-                {item.label === "Me" && <SignOut />}
+                {item.label === "Me" && (
+                  <SignOut signOut={this.props.signOut} />
+                )}
               </span>
             </JoinHeader>
           ))}
@@ -97,4 +118,14 @@ class HomeNav extends Component {
   }
 }
 
-export default HomeNav;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user, // ✅ pull user from redux
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutApi()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeNav);

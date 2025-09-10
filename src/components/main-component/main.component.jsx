@@ -1,3 +1,5 @@
+import PostModel from "../postmodel/postmodel.component";
+
 import "./main.style.css";
 import IconUser from "../../images/user.svg";
 import IconPhoto from "../../images/image-solid-full.svg";
@@ -98,6 +100,7 @@ const MainComponent = (props) => {
             </div>
           </div>
         </div>
+        <PostModel />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 import IconItem from "../../images/item-icon.svg";
 import IconWidget from "../../images/widget-icon.svg";
 import IconPlus from "../../images/plus-icon.svg";
@@ -15,7 +15,7 @@ const LeftComponent = (props) => {
             <a>
               <div className="photo"></div>
               <Link className="link" to="/">
-                Welcome, there !
+                Welcome, {props.user ? props.user.displayName : "there"} !
               </Link>
             </a>
             <a>
@@ -62,4 +62,11 @@ const LeftComponent = (props) => {
     </div>
   );
 };
-export default LeftComponent;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user, // ✅ pull user from redux
+  };
+};
+
+export default connect(mapStateToProps)(LeftComponent);

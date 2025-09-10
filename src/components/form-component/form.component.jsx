@@ -4,7 +4,7 @@ import GoogleImg from "../../images/google.svg";
 
 const FormComponent = (props) => (
   <form>
-    <button type="button" className="google-btn">
+    <button type="button" className="google-btn" onClick={props.signIn}>
       <img src={GoogleImg} alt="Google" />
       Sign in with Google
     </button>
