@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PostModel from "../postmodel/postmodel.component";
 
 import "./main.style.css";
@@ -17,6 +18,24 @@ import { BiLike } from "react-icons/bi";
 import { FaHandsClapping } from "react-icons/fa6";
 
 const MainComponent = (props) => {
+  const [showModal, setShowModal] = useState("close");
+  function handleClick(e) {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    switch (showModal) {
+      case "open":
+        setShowModal("close");
+        break;
+      case "close":
+        setShowModal("open");
+        break;
+      default:
+        setShowModal("close");
+        break;
+    }
+  }
   return (
     <div className="main-container">
       <div className="common-card">
@@ -24,7 +43,7 @@ const MainComponent = (props) => {
           Share
           <div className="user-profile">
             <img className="user" src={IconUser} alt="" />
-            <button>Start a post</button>
+            <button onClick={handleClick}>Start a post</button>
           </div>
           <div className="span-block">
             <button>
@@ -100,7 +119,7 @@ const MainComponent = (props) => {
             </div>
           </div>
         </div>
-        <PostModel />
+        <PostModel showModal={showModal} handleClick={handleClick} />
       </div>
     </div>
   );
