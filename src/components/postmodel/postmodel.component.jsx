@@ -9,6 +9,16 @@ import IconComment from "../../images/comment-dots-regular-full.svg";
 
 const PostModel = (props) => {
   const [editText, setEditText] = useState("");
+  const [shareImage, setShareImage] = useState("");
+
+  function handleImageChange(e) {
+    const image = e.target.files[0];
+    if (image === "" || image === undefined) {
+      alert(`not an image, the file is a ${typeof image}`);
+      return;
+    }
+    setShareImage(image);
+  }
 
   function handleChange(e) {
     setEditText(e.target.value);
@@ -41,7 +51,22 @@ const PostModel = (props) => {
                   onChange={handleChange}
                   placeholder="What's on your mind today ?"
                   autoFocus="true"
-                ></textarea>
+                />
+                <div className="uploadImg">
+                  <input
+                    type="file"
+                    accept="image/gif, image/jpeg, image/png"
+                    name="image"
+                    id="file"
+                    style={{ display: "none" }}
+                    onChange={handleImageChange}
+                  />
+                  <p>
+                    <label htmlFor="file">Select an image to share</label>
+                  </p>
+
+                  {shareImage && <img src={URL.createObjectURL(shareImage)} />}
+                </div>
               </div>
             </div>
             <div className="share-creation">
@@ -59,7 +84,9 @@ const PostModel = (props) => {
                   Anyone
                 </button>
               </div>
-              <button className="postbtn">Post</button>
+              <button className="postbtn" disabled={!editText}>
+                Post
+              </button>
             </div>
           </div>
         </div>
