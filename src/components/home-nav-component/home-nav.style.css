@@ -70,6 +70,10 @@
   margin: -0.2rem;
 }
 
+.job{
+  margin-left: 10px;
+}
+
 .user:hover .sign-out {
   display: block;
   align-items: center;

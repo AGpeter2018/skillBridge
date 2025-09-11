@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
+import firebase from "firebase/compat/app";
+import { postArticleApi } from "../../actions";
 
 import "./postmodel.style.css";
 import IconTimes from "../../images/xmark-solid-full.svg";
@@ -20,6 +22,24 @@ const PostModel = (props) => {
     setVideoLink("");
     setassetArear(area);
   }
+
+  const postArticle = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    const payload = {
+      image: shareImage,
+      video: videoLink,
+      user: props.user,
+      description: editText,
+      timestamp: firebase.firestore.Timestamp.now(),
+    };
+
+    props.postArticle(payload);
+    reset(e);
+  };
 
   function handleImageChange(e) {
     const image = e.target.files[0];
@@ -56,7 +76,7 @@ const PostModel = (props) => {
             <div className="share-content">
               <div className="user-info">
                 {props.user.photoURL ? (
-                  <img src={props.user.photoURL} />
+                  <img src={props.user.photoURL} className="info-icon" />
                 ) : (
                   <img src={IconUser} alt="user icon" className="info-icon" />
                 )}
@@ -131,7 +151,11 @@ const PostModel = (props) => {
                   Anyone
                 </button>
               </div>
-              <button className="postbtn" disabled={!editText}>
+              <button
+                className="postbtn"
+                disabled={!editText}
+                onClick={(event) => postArticle(event)}
+              >
                 Post
               </button>
             </div>
@@ -148,6 +172,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  postArticle: (payload) => dispatch(postArticleApi(payload)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostModel);

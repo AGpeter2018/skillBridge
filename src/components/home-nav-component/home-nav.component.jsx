@@ -30,7 +30,7 @@ class HomeNav extends Component {
           label: "My Network",
           className: "network",
         },
-        { to: "/jobs", icon: IconJobs, label: "Jobs" },
+        { to: "/jobs", icon: IconJobs, label: "Jobs", className: 'job' },
         {
           to: "/post",
           icon: IconPlus,

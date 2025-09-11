@@ -1,4 +1,5 @@
-import { auth, provider } from "../firebase";
+import { auth, provider, storage } from "../firebase";
+import db from "../firebase";
 import { SET_USER } from "./actionType";
 
 export const setUser = (payload) => ({
@@ -36,5 +37,43 @@ export function signOutApi() {
         dispatch(setUser(null));
       })
       .catch((error) => console.error(error.message));
+  };
+}
+
+export function postArticleApi(payload) {
+  return (dispatch) => {
+    if (payload.image !== "") {
+      const upload = storage
+        .ref(`images/${payload.image.name}`)
+        .put(payload.image);
+      upload.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+          console.log(`progress: ${progress}%`);
+          if (snapshot.state === "RUNNING") {
+            console.log(`progress: ${progress}%`);
+          }
+        },
+        (error) => console.log(error.code),
+        async () => {
+          const downloadURL = await upload.snapshot.ref.getDownloadURL();
+          db.collection("articles").add({
+            actor: {
+              description: payload.user.email,
+              title: payload.user.displayName,
+              date: payload.timestamp,
+              image: payload.user.photoURL,
+            },
+            video: payload.video,
+            sharedImg: downloadURL,
+            comments: 0,
+            description: payload.description,
+          });
+        }
+      );
+    }
   };
 }

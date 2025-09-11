@@ -40,9 +40,11 @@ const MainComponent = (props) => {
     <div className="main-container">
       <div className="common-card">
         <div className="share-box">
-          Share
           <div className="user-profile">
+         {props.user && props.user.photoURL ?
+         <img src={props.user.photoURL}/> :
             <img className="user" src={IconUser} alt="" />
+         }
             <button onClick={handleClick}>Start a post</button>
           </div>
           <div className="span-block">
