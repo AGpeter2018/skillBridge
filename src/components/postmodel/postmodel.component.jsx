@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ReactPlayer from "react-player";
+import { connect } from "react-redux";
 
 import "./postmodel.style.css";
 import IconTimes from "../../images/xmark-solid-full.svg";
@@ -10,6 +12,14 @@ import IconComment from "../../images/comment-dots-regular-full.svg";
 const PostModel = (props) => {
   const [editText, setEditText] = useState("");
   const [shareImage, setShareImage] = useState("");
+  const [videoLink, setVideoLink] = useState("");
+  const [assetArear, setassetArear] = useState("");
+
+  function switchAssetArea(area) {
+    setShareImage("");
+    setVideoLink("");
+    setassetArear(area);
+  }
 
   function handleImageChange(e) {
     const image = e.target.files[0];
@@ -26,6 +36,9 @@ const PostModel = (props) => {
 
   const reset = (e) => {
     setEditText("");
+    setShareImage("");
+    setVideoLink("");
+    setassetArear("");
     props.handleClick(e);
   };
 
@@ -42,7 +55,11 @@ const PostModel = (props) => {
             </div>
             <div className="share-content">
               <div className="user-info">
-                <img src={IconUser} alt="user icon" className="info-icon" />
+                {props.user.photoURL ? (
+                  <img src={props.user.photoURL} />
+                ) : (
+                  <img src={IconUser} alt="user icon" className="info-icon" />
+                )}
                 <span>Name</span>
               </div>
               <div className="editor">
@@ -52,29 +69,59 @@ const PostModel = (props) => {
                   placeholder="What's on your mind today ?"
                   autoFocus="true"
                 />
-                <div className="uploadImg">
-                  <input
-                    type="file"
-                    accept="image/gif, image/jpeg, image/png"
-                    name="image"
-                    id="file"
-                    style={{ display: "none" }}
-                    onChange={handleImageChange}
-                  />
-                  <p>
-                    <label htmlFor="file">Select an image to share</label>
-                  </p>
+                {assetArear === "image" ? (
+                  <div className="uploadImg">
+                    <input
+                      type="file"
+                      accept="image/gif, image/jpeg, image/png"
+                      name="image"
+                      id="file"
+                      style={{ display: "none" }}
+                      onChange={handleImageChange}
+                    />
+                    <p>
+                      <label htmlFor="file">Select an image to share</label>
+                    </p>
 
-                  {shareImage && <img src={URL.createObjectURL(shareImage)} />}
-                </div>
+                    {shareImage && (
+                      <img src={URL.createObjectURL(shareImage)} />
+                    )}
+                  </div>
+                ) : (
+                  assetArear === "media" && (
+                    <>
+                      <input
+                        type="text"
+                        placeholder="Please input video link"
+                        value={videoLink}
+                        onChange={(e) => setVideoLink(e.target.value)}
+                      />
+                      {videoLink && (
+                        <div className="video-wrapper">
+                          <ReactPlayer
+                            width={"100%"}
+                            url={videoLink}
+                            controls
+                          />
+                        </div>
+                      )}
+                    </>
+                  )
+                )}
               </div>
             </div>
             <div className="share-creation">
               <div className="attachment-asset">
-                <button className="asset-button">
+                <button
+                  className="asset-button"
+                  onClick={() => switchAssetArea("image")}
+                >
                   <img src={IconPhoto} alt="" />
                 </button>
-                <button className="asset-button">
+                <button
+                  className="asset-button"
+                  onClick={() => switchAssetArea("media")}
+                >
                   <img src={IconVideo} alt="" />
                 </button>
               </div>
@@ -95,4 +142,12 @@ const PostModel = (props) => {
   );
 };
 
-export default PostModel;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user, // ✅ pull user from redux
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostModel);
