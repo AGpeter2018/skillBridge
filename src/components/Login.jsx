@@ -23,19 +23,19 @@ const LoginPage = (props) => {
           <SignIn>Sign In</SignIn>
         </div>
       </nav>
-      <SectionComponent signIn={props.signIn} />
+      <SectionComponent />
     </div>
   );
 };
 
-const mapStateProps = (state) => {
-  return {
-    user: state.userState.user,
-  };
-};
+// const mapStateProps = (state) => {
+//   return {
+//     user: state.userState.user,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => ({
-  signIn: () => dispatch(signInApi()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   signIn: () => dispatch(signInApi()),
+// });
 
-export default connect(mapStateProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

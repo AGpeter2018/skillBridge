@@ -1,14 +1,16 @@
 import "./form.style.css";
 
 import GoogleImg from "../../images/google.svg";
-
+import { signInWithGoogle } from "../../firebase";
 const FormComponent = (props) => (
-  <form>
-    <button type="button" className="google-btn" onClick={props.signIn}>
-      <img src={GoogleImg} alt="Google" />
-      Sign in with Google
-    </button>
-  </form>
+  <div className="form-container">
+    <form>
+      <button type="button" className="google-btn" onClick={signInWithGoogle}>
+        <img src={GoogleImg} alt="Google" />
+        Sign in with Google
+      </button>
+    </form>
+  </div>
 );
 
 export default FormComponent;

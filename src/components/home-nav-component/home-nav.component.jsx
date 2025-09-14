@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { signOutApi } from "../../actions";
+// import { connect } from "react-redux";
+// import { signOutApi } from "../../actions";
 import { Navigate } from "react-router-dom";
 
 // Import your icons
@@ -30,7 +30,7 @@ class HomeNav extends Component {
           label: "My Network",
           className: "network",
         },
-        { to: "/jobs", icon: IconJobs, label: "Jobs", className: 'job' },
+        { to: "/jobs", icon: IconJobs, label: "Jobs", className: "job" },
         {
           to: "/post",
           icon: IconPlus,
@@ -44,7 +44,7 @@ class HomeNav extends Component {
           className: "network",
         },
         {
-          to: "/",
+          // to: "/",
           icon: IconUser,
           icon2: IconDown,
           label: "Me",
@@ -62,6 +62,8 @@ class HomeNav extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
+
     return (
       <div className="home-nav-container">
         <footer className="home-nav-footer">
@@ -73,12 +75,10 @@ class HomeNav extends Component {
               }`}
               to={item.to}
             >
-              {!this.props.user && <Navigate to="/" replace />}
-              {item.label === "Me" &&
-              this.props.user &&
-              this.props.user.photoURL ? (
+              {!currentUser && <Navigate to="/signIns" replace />}
+              {item.label === "Me" && currentUser && currentUser.photoURL ? (
                 <img
-                  src={this.props.user.photoURL}
+                  src={currentUser.photoURL}
                   alt="User profile"
                   className={`home-img ${
                     item.label === "Me" || item.label === "Post"
@@ -107,7 +107,8 @@ class HomeNav extends Component {
                   />
                 )}
                 {item.label === "Me" && (
-                  <SignOut signOut={this.props.signOut} />
+                  <SignOut currentUser={currentUser} />
+                  // <SignOut signOut={this.props.signOut} />
                 )}
               </span>
             </JoinHeader>
@@ -118,14 +119,14 @@ class HomeNav extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userState.user, // ✅ pull user from redux
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.userState.user, // ✅ pull user from redux
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(signOutApi()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   signOut: () => dispatch(signOutApi()),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeNav);
+export default HomeNav;

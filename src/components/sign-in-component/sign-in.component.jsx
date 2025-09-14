@@ -5,7 +5,7 @@ import "./sign-in.style.css";
 
 const SignIn = (props) => (
   <div className="sign-in">
-    <Link className="sign-link" to="/">
+    <Link className="sign-link" to="/signIns">
       {props.children}
     </Link>
   </div>

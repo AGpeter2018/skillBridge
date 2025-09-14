@@ -8,13 +8,13 @@ import LeftComponent from "./left-component/left.component";
 import MainComponent from "./main-component/main.component";
 import RightComponent from "./right-component/right.component";
 
-const HomeComponent = ({ user, children }) => {
+const HomeComponent = ({ user, children, currentUser }) => {
   return (
     <div className="home-container">
       <div className="header-container">
         <HeaderComponent />
       </div>
-      <HomeNav user={user} />
+      <HomeNav user={user} currentUser={currentUser} />
       <div className="container">
         <SectionHome>{children}</SectionHome>
       </div>
@@ -27,10 +27,10 @@ const HomeComponent = ({ user, children }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userState.user, // ✅ pull user from redux
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.userState.user, // ✅ pull user from redux
+//   };
+// };
 
-export default connect(mapStateToProps)(HomeComponent);
+export default HomeComponent;

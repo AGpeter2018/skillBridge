@@ -1,0 +1,17 @@
+.submitBtn {
+  /* margin: 1rem 0rem 0 1rem; */
+  margin: 0 5rem;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: gray;
+  padding: 10px 70px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.submitBtn:hover {
+  background-color: gray;
+  color: white;
+}

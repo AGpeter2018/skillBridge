@@ -63,10 +63,10 @@ const LeftComponent = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userState.user, // ✅ pull user from redux
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.userState.user, // ✅ pull user from redux
+//   };
+// };
 
-export default connect(mapStateToProps)(LeftComponent);
+export default LeftComponent;

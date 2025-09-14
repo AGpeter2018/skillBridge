@@ -11,7 +11,7 @@ const SectionComponent = (props) => {
       <h1>Welcome to your professional community</h1>
       <img src={heroImage} alt="Hero-Image" className="hero-img" />
       <div className="form-container">
-        <FormComponent signIn={props.signIn} />
+        <FormComponent />
       </div>
     </div>
   );

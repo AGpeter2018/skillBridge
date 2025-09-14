@@ -166,14 +166,14 @@ const PostModel = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.userState.user, // ✅ pull user from redux
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.userState.user, // ✅ pull user from redux
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => ({
-  postArticle: (payload) => dispatch(postArticleApi(payload)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   postArticle: (payload) => dispatch(postArticleApi(payload)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostModel);
+export default PostModel;
