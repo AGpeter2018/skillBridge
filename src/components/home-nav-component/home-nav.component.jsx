@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // import { connect } from "react-redux";
 // import { signOutApi } from "../../actions";
 import { Navigate } from "react-router-dom";
@@ -17,107 +17,99 @@ import IconNav from "../../images/nav-work.svg";
 import SignOut from "../sign-out-component/sign-out.component";
 import "./home-nav.style.css";
 import { signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
-class HomeNav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      navItems: [
-        { to: "/home", icon: IconHome, label: "Home" },
-        {
-          to: "/network",
-          icon: IconNetwork,
-          label: "My Network",
-          className: "network",
-        },
-        { to: "/jobs", icon: IconJobs, label: "Jobs", className: "job" },
-        {
-          to: "/post",
-          icon: IconPlus,
-          label: "Post",
-          className: "plus",
-        },
-        {
-          to: "/notifications",
-          icon: IconNotification,
-          label: "Notifications",
-          className: "network",
-        },
-        {
-          // to: "/",
-          icon: IconUser,
-          icon2: IconDown,
-          label: "Me",
-          className: "user",
-        },
-        {
-          to: "/works",
-          icon: IconNav,
-          icon2: IconDown,
-          label: "Works",
-          className: "work",
-        },
-      ],
-    };
-  }
-
-  render() {
-    const { currentUser } = this.props;
-
-    return (
-      <div className="home-nav-container">
-        <footer className="home-nav-footer">
-          {this.state.navItems.map((item, index) => (
-            <JoinHeader
-              key={index}
-              className={`Home-nav ${item.className || ""} ${
-                item.label === "Works" ? "works-nav" : ""
-              }`}
-              to={item.to}
-            >
-              {!currentUser && <Navigate to="/signIns" replace />}
-              {item.label === "Me" && currentUser && currentUser.photoURL ? (
+const navItems = [
+  { to: "/home", icon: IconHome, label: "Home" },
+  {
+    to: "/network",
+    icon: IconNetwork,
+    label: "My Network",
+    className: "network",
+  },
+  { to: "/jobs", icon: IconJobs, label: "Jobs", className: "job" },
+  {
+    to: "/post",
+    icon: IconPlus,
+    label: "Post",
+    className: "plus",
+  },
+  {
+    to: "/notifications",
+    icon: IconNotification,
+    label: "Notifications",
+    className: "network",
+  },
+  {
+    // to: "/",
+    icon: IconUser,
+    icon2: IconDown,
+    label: "Me",
+    className: "user",
+  },
+  {
+    to: "/works",
+    icon: IconNav,
+    icon2: IconDown,
+    label: "Works",
+    className: "work",
+  },
+];
+const HomeNav = () => {
+  const currentUser = useSelector((state) => state.user.currentUser);
+  return (
+    <div className="home-nav-container">
+      <footer className="home-nav-footer">
+        {navItems.map((item, index) => (
+          <JoinHeader
+            key={index}
+            className={`Home-nav ${item.className || ""} ${
+              item.label === "Works" ? "works-nav" : ""
+            }`}
+            to={item.to}
+          >
+            {!currentUser && <Navigate to="/signIns" replace />}
+            {item.label === "Me" && currentUser && currentUser.photoURL ? (
+              <img
+                src={currentUser.photoURL}
+                alt="User profile"
+                className={`home-img ${
+                  item.label === "Me" || item.label === "Post"
+                    ? "user-image"
+                    : ""
+                }`}
+              />
+            ) : (
+              <img
+                src={item.icon}
+                alt={`${item.label} icon`}
+                className={`home-img ${
+                  item.label === "Me" || item.label === "Post"
+                    ? "user-image"
+                    : ""
+                }`}
+              />
+            )}
+            <span className={item.className || ""}>
+              {item.label}
+              {item.icon2 && (
                 <img
-                  src={currentUser.photoURL}
-                  alt="User profile"
-                  className={`home-img ${
-                    item.label === "Me" || item.label === "Post"
-                      ? "user-image"
-                      : ""
-                  }`}
-                />
-              ) : (
-                <img
-                  src={item.icon}
-                  alt={`${item.label} icon`}
-                  className={`home-img ${
-                    item.label === "Me" || item.label === "Post"
-                      ? "user-image"
-                      : ""
-                  }`}
+                  src={item.icon2}
+                  alt="dropdown icon"
+                  className="down-icon"
                 />
               )}
-              <span className={item.className || ""}>
-                {item.label}
-                {item.icon2 && (
-                  <img
-                    src={item.icon2}
-                    alt="dropdown icon"
-                    className="down-icon"
-                  />
-                )}
-                {item.label === "Me" && (
-                  <SignOut currentUser={currentUser} />
-                  // <SignOut signOut={this.props.signOut} />
-                )}
-              </span>
-            </JoinHeader>
-          ))}
-        </footer>
-      </div>
-    );
-  }
-}
+              {item.label === "Me" && (
+                <SignOut />
+                // <SignOut signOut={this.props.signOut} />
+              )}
+            </span>
+          </JoinHeader>
+        ))}
+      </footer>
+    </div>
+  );
+};
 
 // const mapStateToProps = (state) => {
 //   return {

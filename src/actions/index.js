@@ -1,11 +1,12 @@
 // import { auth, provider, storage } from "../firebase";
 // import db from "../firebase";
-// import { SET_USER } from "./actionType";
+import { SET_CURRENT_USER } from "./actionType";
+import { auth, createUserProfileDocument } from "../firebase";
 
-// export const setUser = (payload) => ({
-//   type: SET_USER,
-//   user: payload,
-// });
+export const setCurrentUser = (user) => ({
+  type: SET_CURRENT_USER,
+  payload: user,
+});
 
 // export function signInApi() {
 //   return (dispatch) => {
@@ -19,26 +20,39 @@
 //   };
 // }
 
-// export function getUserAuth() {
-//   return (dispatch) => {
-//     auth.onAuthStateChanged(async (user) => {
-//       if (user) {
-//         dispatch(setUser(user));
-//       }
-//     });
-//   };
-// }
+export function getUserAuth() {
+  return (dispatch) => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
+          userRef.onSnapshot((snapShot) => {
+            dispatch(
+              setCurrentUser({
+                id: snapShot.id,
+                ...snapShot.data(),
+              })
+            );
+          });
+        } else {
+          dispatch(setCurrentUser(null));
+        }
+      }
+    });
+    return unsubscribeFromAuth;
+  };
+}
 
-// export function signOutApi() {
-//   return (dispatch) => {
-//     auth
-//       .signOut()
-//       .then(() => {
-//         dispatch(setUser(null));
-//       })
-//       .catch((error) => console.error(error.message));
-//   };
-// }
+export const signOutApi = () => {
+  return async (dispatch) => {
+    try {
+      await auth.signOut();
+      dispatch(setCurrentUser(null));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+};
 
 // export function postArticleApi(payload) {
 //   return (dispatch) => {
