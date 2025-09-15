@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   margin: 8rem auto;
-  max-width: 400px; /* ✅ limit width so it’s not too wide */
-  padding: 5rem;
+  max-width: 450px; /* ✅ limit width so it’s not too wide */
+  padding: 5px 0;
   background: white;
   border-radius: 8px;
 
@@ -37,10 +37,7 @@
 }
 
 .formInput .form-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .link a {
@@ -56,4 +53,20 @@
   padding: 1rem;
   border-radius: 10px;
   pointer-events: none;
+}
+
+.logo {
+  padding-top: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .sign-container h3 {
+    font-size: 0.75rem;
+  }
+  .sign-container h2 {
+    font-size: 0.75rem;
+  }
+  .link {
+    font-size: 0.85rem;
+  }
 }

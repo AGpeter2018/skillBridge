@@ -17,7 +17,7 @@ const LoginPage = (props) => {
           <img src={linkedInLogo} alt="LinkedIn" />
         </a>
         <div className="header-sign">
-          <JoinHeader className="join-link" to="/">
+          <JoinHeader className="join-link" to="/join">
             Join now
           </JoinHeader>
           <SignIn>Sign In</SignIn>

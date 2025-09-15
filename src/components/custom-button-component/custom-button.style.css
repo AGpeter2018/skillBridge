@@ -6,7 +6,7 @@
   outline: none;
   background: transparent;
   color: gray;
-  padding: 10px 70px;
+  padding: 10px 77px;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s linear;
@@ -14,4 +14,12 @@
 .submitBtn:hover {
   background-color: gray;
   color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .submitBtn {
+    font-size: 0.85rem;
+    padding: 0;
+    margin: 0 8rem;
+  }
 }
